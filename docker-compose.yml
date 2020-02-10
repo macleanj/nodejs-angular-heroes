@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  hello-world-nodejs:
+    hostname: hello-world-nodejs
+    container_name: hello-world-nodejs
+    # build:
+    #   context: ./build
+    #   dockerfile: Dockerfile
+    # image: jmaclean/hello-world-nodejs
+    image: node:10.19
+    # env_file order matters. The last one is leading
+    ports:
+      - "80:80"
+      - "8080:8080"
+      - "4200:4200"
+      - "443:443"
+      - "8443:8443"
+    volumes: 
+      - ./:/app
+    command: tail -f /dev/null
