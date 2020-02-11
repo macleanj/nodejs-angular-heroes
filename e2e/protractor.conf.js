@@ -14,7 +14,13 @@ exports.config = {
   ],
   capabilities: {
     chromeOptions: {
-      args: ["--headless"]
+      args: [
+        "--headless",
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-gpu",
+        "--disable-dev-shm-usage"
+      ]
     },
     'browserName': 'chrome'
   },

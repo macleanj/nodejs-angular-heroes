@@ -1,9 +1,11 @@
 FROM node:11-alpine AS builder
-COPY . ./angular-example-app
-WORKDIR /angular-example-app
+COPY . ./app
+WORKDIR /app
 RUN npm install
 RUN npm run build:prod:en
 
-FROM nginx:1-alpine
-COPY --from=builder /angular-example-app/dist/browser/ /usr/share/nginx/html
-EXPOSE 80
+FROM bitnami/nginx:1.16.1
+LABEL description="Angular heroes build for production"
+LABEL maintainer="CrossLogic Consulting - Jerome Mac Lean"
+COPY --from=builder /app/dist/browser/ /app
+EXPOSE 8080

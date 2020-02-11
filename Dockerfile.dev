@@ -1,0 +1,16 @@
+FROM node:13.8.0
+
+LABEL description="Image able to perform Angular e2e tests with headless Chrome"
+LABEL maintainer="CrossLogic Consulting - Jerome Mac Lean"
+
+ENV CHROME_BIN=chromium
+
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update && \
+    apt-get install -y \
+    google-chrome-stable=80.0.3987.87-1 \
+    chromium && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+EXPOSE 8080

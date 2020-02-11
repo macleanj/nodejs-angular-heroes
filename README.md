@@ -28,17 +28,65 @@
   </p>
 </p>
 
+# Credits
+This project is copied from [angular8](https://github.com/Ismaestro/angular8-example-app) and all credits for the content will go to the ones that deserved them :-)
+
+# Overview
+This project will be used to develop and test CICD pipelines for OpenShift, Kubernetes, AWS, and other cloud platforms.
+
+# Usage
+## Development
+The first section of the docker-compose.yml describes the development configuration. It runs node. The application should be developed from within the container to avoid any external dependencies.
+```
+docker-compose up
+docker exec -ti nodejs-angular-heroes bash
+cd /app
+npm install
+npm test
+npm start
+
+export CHROME_BIN=/app/node_modules/node_modules/chromium
+```
+http://localhost:4200
+
+## Production
+The first section of the docker-compose.yml describes how the CICD pipeline would build and test the application and make it ready for production. The application will eventually run on bare nginx only.
+
+
+-----
+# Original README from the source project
+Files changed from the original project:
+- README.md
+- Dockerfile
+- Dockerfile.dev
+- docker-compose.yml
+- package.json 
+  - added ```--host 0.0.0.0 --port 4200``` to start to be able to expose port
+  - added devDependencies
+    - "chromium": "2.1.1",
+    - "protractor": "5.4.3", -> to be aligned with chrome 80 in Dockerfile:apt-get
+
 ## Table of contents
 
-- [Status](#status)
-- [What's included](#whats-included)
-- [Quick start](#quick-start)
-- [Bugs and feature requests](#bugs-and-feature-requests)
-- [Apply this to your project](#apply-this-to-your-project)
-- [Contributing](#contributing)
-- [Creators](#creators)
-- [Thanks](#thanks)
-- [Copyright and license](#copyright-and-license)
+- [Credits](#credits)
+- [Overview](#overview)
+- [Usage](#usage)
+  - [Development](#development)
+  - [Production](#production)
+- [Original README from the source project](#original-readme-from-the-source-project)
+  - [Table of contents](#table-of-contents)
+  - [Status](#status)
+  - [What's included](#whats-included)
+    - [Angular Ivy](#angular-ivy)
+    - [Angular Universal and i18n](#angular-universal-and-i18n)
+    - [Firebase](#firebase)
+  - [Travis CI](#travis-ci)
+  - [Quick start](#quick-start)
+  - [Bugs and feature requests](#bugs-and-feature-requests)
+  - [Contributing](#contributing)
+  - [Creators](#creators)
+  - [Thanks](#thanks)
+  - [Copyright and license](#copyright-and-license)
 
 ## Status
 

@@ -1,21 +1,38 @@
 version: "3.7"
 
 services:
-  hello-world-nodejs:
-    hostname: hello-world-nodejs
-    container_name: hello-world-nodejs
-    # build:
-    #   context: ./build
-    #   dockerfile: Dockerfile
-    # image: jmaclean/hello-world-nodejs
-    image: node:10.19
-    # env_file order matters. The last one is leading
+  # Testing DEV environment
+  nodejs-angular-heroes-dev:
+    hostname: nodejs-angular-heroes-dev
+    container_name: nodejs-angular-heroes-dev
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+    image: jmaclean/nodejs-angular-heroes-dev
+    # image: node:13.8.0
     ports:
-      - "80:80"
-      - "8080:8080"
       - "4200:4200"
-      - "443:443"
-      - "8443:8443"
+      - "9876:9876"
     volumes: 
       - ./:/app
     command: tail -f /dev/null
+    # Followed by:
+    # - docker exec -ti nodejs-angular-heroes-dev bash
+    # - cd /app
+    # - npm install
+    # - npm start
+
+  # # Compiled and ready for PROD  
+  # nodejs-angular-heroes-prod:
+  #   hostname: nodejs-angular-heroes-prod
+  #   container_name: nodejs-angular-heroes-prod
+  #   build:
+  #     context: ./
+  #     dockerfile: Dockerfile
+  #   image: jmaclean/nodejs-angular-heroes-prod
+  #   # image: bitnami/nginx:1.16.0
+  #   ports:
+  #     - "8080:8080"
+  #     - "8443:8443"
+  #   # volumes: 
+  #   #   - ./dist/browser:/app:ro
