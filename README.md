@@ -1,7 +1,18 @@
 <p align="center">
-  <a href="https://angular.io/">
-    <img src="https://www.angularexampleapp.com/assets/images/angular.svg" alt="Logo" width=72 height=72>
+  <a href="https://www.crosslogic-consulting.com">
+    <img src="https://crosslogic.s3.amazonaws.com/crosslogic.png" alt="Logo CrossLogic" height=72>
   </a>
+  <br>
+  <br>
+  <a href="https://www.crosslogic-consulting.com">
+    <img src="https://crosslogic.s3.amazonaws.com/plus.png" alt="Logo CrossLogic" height=30>
+  </a>
+  <br>
+  <br>
+  <a href="https://angular.io/">
+    <img src="https://www.angularexampleapp.com/assets/images/angular.svg" alt="Logo Angular" height=72>
+  </a>
+  
 
   <h3 align="center">Angular Example App</h3>
 
@@ -65,6 +76,7 @@ Files changed from the original project:
   - added devDependencies
     - "chromium": "2.1.1",
     - "protractor": "5.4.3", -> to be aligned with chrome 80 in Dockerfile:apt-get
+- protractor.conf.js
 
 ## Table of contents
 
