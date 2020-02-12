@@ -42,7 +42,12 @@ pipeline {
   }
 
   // Any
-  agent any
+  // agent any
+
+  // New
+  agent {
+    label 'jnlp-slave'
+  }
 
   // CrossLogic
   // agent {
