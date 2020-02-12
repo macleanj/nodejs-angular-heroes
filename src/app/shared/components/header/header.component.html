@@ -11,23 +11,13 @@
       </div>
       <div fxFlex class="text--right">
         <app-search-bar></app-search-bar>
-        <button aria-label="select language button" mat-icon-button [matMenuTriggerFor]="matmenu">
-          <mat-icon>language</mat-icon>
-        </button>
-        <mat-menu #matmenu="matMenu">
-          <div mat-menu-item *ngFor="let lang of languages">
-            <a class="language-link"
-               href="{{(lang.name === 'en') ? currentUrl : '/' + lang.name + currentUrl}}"
-               (click)="changeLanguage(lang.name)">
-              <mat-icon>flag</mat-icon>
-              <span>{{lang.label}}</span>
-            </a>
-          </div>
-        </mat-menu>
         <a class="icon__image" href="{{appConfig.repositoryURL}}" rel="noreferrer" target="_blank">
           <img alt="github logo" src="/assets/images/github-circle-white-transparent.svg">
         </a>
-      </div>
+        <a style="margin-left:15px;" href="https://www.crosslogic-consulting.com" rel="noreferrer" target="_blank">
+          <img alt="CrossLogic logo" src="https://crosslogic.s3.amazonaws.com/crosslogic_white.png" height="45">
+        </a>
+        </div>
     </div>
   </nav>
   <section class="progress-bar">

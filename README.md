@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.crosslogic-consulting.com">
-    <img src="https://crosslogic.s3.amazonaws.com/crosslogic.png" alt="Logo CrossLogic" height=72>
+    <img src="https://crosslogic.s3.amazonaws.com/crosslogic.png" alt="CrossLogic logo" height=72>
   </a>
   <br>
   <br>
@@ -77,6 +77,8 @@ Files changed from the original project:
     - "chromium": "2.1.1",
     - "protractor": "5.4.3", -> to be aligned with chrome 80 in Dockerfile:apt-get
 - protractor.conf.js
+- search/replace -> 3f51bxxxx5/3179be;
+- src/i18n/messages.en.xlf -> logo
 
 ## Table of contents
 
