@@ -79,6 +79,7 @@ Files changed from the original project:
 - protractor.conf.js
 - search/replace -> 3f51bxxxx5/3179be;
 - src/i18n/messages.en.xlf -> logo
+- src/app/shared/components/header/header.component.html -> logo
 
 ## Table of contents
 
