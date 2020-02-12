@@ -70,6 +70,8 @@ pipeline {
   stages {
     stage ('Prepare generic environment') {
       steps {
+        sh 'echo "Version/Hash requested: ${CICD_TAGS_NAME}/${GIT_COMMIT_SHORT}"'
+
         // environvironment only has to be loaded once
         load "$JENKINS_PATH/build/config/env.files/generic.groovy"
         load "$JENKINS_PATH/build/config/env.files/tag_env.groovy"
