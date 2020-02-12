@@ -39,10 +39,13 @@ pipeline {
     PREP_LOAD_ENV = sh(returnStdout: false, script: "${JENKINS_PATH}/build/config/_confConvert.sh ${CICD_TAGS_NAME} ${GIT_COMMIT_SHORT} > /dev/null 2>&1")
   }
 
+  // Any
+  agent any
+
   // CrossLogic
-  agent {
-    label 'docker'
-  }
+  // agent {
+  //   label 'docker'
+  // }
 
   // Kubernetes
   // agent {
