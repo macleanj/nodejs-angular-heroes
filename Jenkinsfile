@@ -1,3 +1,5 @@
+// daimler-wltp-sim-jenkins
+
 pipeline {
 
   // Installed plugins:
@@ -29,7 +31,7 @@ pipeline {
     CICD_TAGS_NAME = "${TAG_NAME ? TAG_NAME : 'None'}"
 
     // GIT environment variables
-    GIT_COMMIT_SHORT = sh(returnStdout: true, script: 'git rev-parse HEAD').trim().take(7)
+    GIT_COMMIT_SHORT = sh(returnStdout: true, script: 'git rev-parse HEAD').trim().take(8)
     GIT_AUTHOR_NAME = sh(returnStdout: true, script: 'git show -s --pretty=%an').trim()
 
     // Jenkins environment variables
@@ -110,7 +112,7 @@ pipeline {
         environment name: 'CICD_BUILD_ENABLED', value: '1'
       }
       steps {
-        container ('dind') {
+        // container ('dind') {
           sh 'echo "Build stage. Building image for ${APP_NAME} version ${CICD_TAGS_ID}."'
 
           dir ("${CICD_BUILD_PATH}") {
@@ -118,7 +120,7 @@ pipeline {
               dockerImage = docker.build("${CICD_REGISTRY}/${APP_NAME}:${CICD_TAGS_ID}", "-f ${CICD_BUILD_FILE} .")
             }
           }
-        }
+        // }
       }
     }
     stage ('Push Image') {
@@ -126,13 +128,13 @@ pipeline {
         environment name: 'CICD_BUILD_ENABLED', value: '1'
       }
       steps {   
-        container ('dind') {
+        // container ('dind') {
           script {
             docker.withRegistry( "${CICD_REGISTRY_URL}", "${CICD_REGISTRY_CREDENTIALS}" ) {
               dockerImage.push()
             }
           }
-        }
+        // }
       }
     }
     stage ('Show Env Build Temp') {
