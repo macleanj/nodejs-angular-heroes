@@ -1,5 +1,3 @@
-// daimler-wltp-sim-jenkins
-
 pipeline {
 
   // Installed plugins:
@@ -44,26 +42,21 @@ pipeline {
   // Any
   // agent any
 
-  // New
-  agent {
-    label 'jnlp-slave'
-  }
-
   // CrossLogic
   // agent {
   //   label 'docker'
   // }
 
   // Kubernetes
-  // agent {
-  //   kubernetes {
-  //     label 'jenkins-slave'
-  //     cloud 'kubernetes'
-  //     defaultContainer 'jnlp'
-  //     instanceCap 1
-  //     yamlFile "build/k8/build-pod-dind.yml"
-  //   }
-  // }
+  agent {
+    kubernetes {
+      label 'jenkins-slave'
+      cloud 'kubernetes'
+      defaultContainer 'jnlp'
+      instanceCap 1
+      yamlFile "build/k8/build-pod-dind.yml"
+    }
+  }
 
   // Notes
   // Branches should run otherwise tags get orphaned
