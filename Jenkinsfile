@@ -29,7 +29,7 @@ pipeline {
     CICD_TAGS_NAME = "${TAG_NAME ? TAG_NAME : 'None'}"
 
     // GIT environment variables
-    GIT_COMMIT_SHORT = sh(returnStdout: true, script: 'git rev-parse HEAD').trim().take(7)
+    GIT_COMMIT_SHORT = sh(returnStdout: true, script: 'git rev-parse HEAD').trim().take(8)
     GIT_AUTHOR_NAME = sh(returnStdout: true, script: 'git show -s --pretty=%an').trim()
 
     // Jenkins environment variables
@@ -39,21 +39,24 @@ pipeline {
     PREP_LOAD_ENV = sh(returnStdout: false, script: "${JENKINS_PATH}/build/config/_confConvert.sh ${CICD_TAGS_NAME} ${GIT_COMMIT_SHORT} > /dev/null 2>&1")
   }
 
+  // Any
+  // agent any
+
   // CrossLogic
-  agent {
-    label 'docker'
-  }
+  // agent {
+  //   label 'docker'
+  // }
 
   // Kubernetes
-  // agent {
-  //   kubernetes {
-  //     label 'jenkins-slave'
-  //     cloud 'kubernetes'
-  //     defaultContainer 'jnlp'
-  //     instanceCap 1
-  //     yamlFile "build/k8/build-pod-dind.yml"
-  //   }
-  // }
+  agent {
+    kubernetes {
+      label 'jenkins-slave'
+      cloud 'kubernetes'
+      defaultContainer 'jnlp'
+      instanceCap 1
+      yamlFile "build/k8/build-pod-dind.yml"
+    }
+  }
 
   // Notes
   // Branches should run otherwise tags get orphaned
@@ -67,6 +70,8 @@ pipeline {
   stages {
     stage ('Prepare generic environment') {
       steps {
+        sh 'echo "Version/Hash requested: ${CICD_TAGS_NAME}/${GIT_COMMIT_SHORT}"'
+
         // environvironment only has to be loaded once
         load "$JENKINS_PATH/build/config/env.files/generic.groovy"
         load "$JENKINS_PATH/build/config/env.files/tag_env.groovy"
@@ -105,7 +110,7 @@ pipeline {
         environment name: 'CICD_BUILD_ENABLED', value: '1'
       }
       steps {
-        container ('dind') {
+        // container ('dind') {
           sh 'echo "Build stage. Building image for ${APP_NAME} version ${CICD_TAGS_ID}."'
 
           dir ("${CICD_BUILD_PATH}") {
@@ -113,7 +118,7 @@ pipeline {
               dockerImage = docker.build("${CICD_REGISTRY}/${APP_NAME}:${CICD_TAGS_ID}", "-f ${CICD_BUILD_FILE} .")
             }
           }
-        }
+        // }
       }
     }
     stage ('Push Image') {
@@ -121,13 +126,13 @@ pipeline {
         environment name: 'CICD_BUILD_ENABLED', value: '1'
       }
       steps {   
-        container ('dind') {
+        // container ('dind') {
           script {
             docker.withRegistry( "${CICD_REGISTRY_URL}", "${CICD_REGISTRY_CREDENTIALS}" ) {
               dockerImage.push()
             }
           }
-        }
+        // }
       }
     }
     stage ('Show Env Build Temp') {

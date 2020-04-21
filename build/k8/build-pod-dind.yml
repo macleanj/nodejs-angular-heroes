@@ -10,7 +10,7 @@ spec:
   containers:
     - name: jnlp
       # image: jenkins/jnlp-slave:3.40-1
-      image: jenkins/jnlp-slave
+      image: jenkins/jnlp-slave:3.40-1
       # resources:
       #   limits:
       #     cpu: 1

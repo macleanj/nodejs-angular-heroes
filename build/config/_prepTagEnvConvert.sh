@@ -7,7 +7,7 @@ programDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 baseName=$(echo ${programName} | sed -e 's/.sh//g')
 envDir="env.files"
 tagFile=${envDir}/tag_env.conf
-debug=1
+debug=0
 
 source $programDir/generic.conf
 CICD_TAGS_NAME=$1
