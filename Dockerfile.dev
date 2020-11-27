@@ -9,7 +9,8 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
     echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list && \
     apt-get update && \
     apt-get install -y \
-    google-chrome-stable=80.0.3987.87-1 \
+    # https://www.ubuntuupdates.org/pm/google-chrome-stable
+    google-chrome-stable=81.0.4044.113-1 \
     chromium && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
