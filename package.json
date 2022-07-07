@@ -109,7 +109,7 @@
     "karma-jasmine-html-reporter": "1.4.2",
     "karma-mocha-reporter": "2.2.5",
     "karma-remap-istanbul": "0.6.0",
-    "moment": "2.24.0",
+    "moment": "2.29.4",
     "ng-bullet": "1.0.3",
     "ng-mocks": "8.0.0",
     "ng-packagr": "10.1.1",
